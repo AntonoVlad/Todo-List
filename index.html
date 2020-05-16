@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <meta charset="utf-8"/>
+       <title>Todo List</title>
+        <link rel="stylesheet" href="style.css/style.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+       <header class="page-header">
+           <h1>Todo List</h1>
+           <div class="page-search-wrapper">
+              <input class="page-search input" type="text" placeholder="Search...">
+              <i class="fa fa-search" aria-hidden="true"></i>
+           </div>
+       </header>
+
+       <section class="page-body">
+
+           <section class="add-task-section">
+               <input class="new-task-input input"  type="text" placeholder="New task...">
+               <button class="button">ADD</button>
+           </section>
+
+           <section class="open-task-section">
+
+              <div class="header">
+               <h4>Open</h4>
+               <select class="select">
+                  <option>Date creation (Asc)   </option>
+                  <option>Date creation (Dsc)   </option>
+               </select>
+               </div>
+               <div class="task-block">
+                   <div class="task">
+                        <div>
+                            <input class="task-checkbox" type="checkbox">
+                        </div>
+                        <div class="task-text">
+                            Make a homework
+                        </div>
+                        <div>
+                           <div class="task-time">07:53 PM</div>
+                        </div>
+                   </div>
+                   <div class="task">
+                       <div>
+                           <input class="task-checkbox" type="checkbox">
+                       </div>
+                       <div class="task-text">Here is an example of todo task with long text description,that wraps to the next row
+                       </div>
+                       <div class="task-time">08:34PM</div>
+                   </div>
+
+               </div>
+               <div class="link-wrapper" >
+                   <a href="#">Clear "Open" list</a>
+               </div>
+           </section>
+
+           <section class="done-task-section">
+
+               <div class="header">
+               <h4>Done</h4>
+               <select class="select">
+                  <option>Text (Desc)   </option>
+                  <option>Text (Transc) </option>
+               </select>
+
+               </div>
+                    <div class="task-block">
+                   <div class="task">
+                        <div>
+                            <input class="task-checkbox" type="checkbox">
+                        </div>
+                        <div class="task-text">
+                            Report current day work in time journal
+                        </div>
+                        <div>
+                           <div class="task-time">09:00 AM</div>
+                           <div class="task-clock">07:53 PM</div>
+                        </div>
+                   </div>
+                   <div class="task">
+                        <div>
+                            <input class="task-checkbox" type="checkbox">
+                        </div>
+                        <div class="task-text">
+                            Celebrate international Beer Day
+                        </div>
+                        <div>
+                           <div class="task-time">09:00 AM</div>
+                           <div class="task-clock">07:53 PM</div>
+                        </div>
+                   </div>
+                   <div class="task">
+                        <div>
+                            <input class="task-checkbox" type="checkbox">
+                        </div>
+                        <div class="task-text">
+                            Buy some milk
+                        </div>
+                        <div>
+                           <div class="task-time">09:00 AM</div>
+                           <div class="task-clock">07:53 PM</div>
+                        </div>
+                   </div>
+               </div>
+                 <div class="link-wrapper" >
+                   <a href="#">Clear "Done" list</a>
+               </div>
+
+             </section>
+
+       </section>
+        <footer class="task-info">
+               <div class="task-after">
+                   by Roman Rodionov ©
+               </div>
+<!--            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7970.259378100719!2d30.212551947653196!3d60.038866010602376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x469635f5daa9c8c9%3A0x54063b379b7f37f7!2z0JrQvtC80LXQvdC00LDQvdGC0YHQutC40Lkg0L_RgC4sIDY0LCDQodCw0L3QutGCLdCf0LXRgtC10YDQsdGD0YDQsywgMTk3MzUw!5e0!3m2!1sru!2sru!4v1589651031471!5m2!1sru!2sru" width="200" height="100" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>-->
+       </footer>
+
+    </body>
+</html>
