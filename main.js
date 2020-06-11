@@ -1,18 +1,14 @@
 let addBtn = document.getElementById("add-btn")
+let tasksData = JSON.parse(localStorage.getItem("task-data")) || []
 addBtn.onclick = function () {
     let taskInput = document.getElementById("task-input")
     let taskInputValue = taskInput.value
-    let task = creatTask()
+    console.log(tasksData)
+    tasksData.push({title: taskInputValue})
+    localStorage.setItem("task-data", JSON.stringify(tasksData))
+    let task = creatTaskWithContent(taskInputValue)
     let taskBlock = document.getElementById("task-block")
     taskBlock.appendChild(task)
-    let chekbox = creatChekbox(task)
-    task.appendChild(chekbox)
-    let taskTextBox = creatTextbox(taskInputValue)
-    task.appendChild(taskTextBox)
-    let taskTimeBox = creatTaskTimeBox()
-    task.appendChild(taskTimeBox)
-    let taskTime = creatTaskTime()
-    taskTimeBox.appendChild(taskTime)
 }
 
 function creatChekbox(task) {
@@ -85,7 +81,28 @@ taskFilter.oninput = function () {
         let taskTextBox = task.querySelector(".task-text")
         let taskText = taskTextBox.textContent
         let needShowTask = taskText.includes(taskFilterValue)
-        task.classList.toggle("hidden",!needShowTask)
+        task.classList.toggle("hidden", !needShowTask)
     })
 }
+
+function creatTaskWithContent(taskInputValue) {
+    let task = creatTask()
+    let chekbox = creatChekbox(task)
+    task.appendChild(chekbox)
+    let taskTextBox = creatTextbox(taskInputValue)
+    task.appendChild(taskTextBox)
+    let taskTimeBox = creatTaskTimeBox()
+    task.appendChild(taskTimeBox)
+    let taskTime = creatTaskTime()
+    taskTimeBox.appendChild(taskTime)
+
+    return task
+}
+
+tasksData.forEach(function (taskData) {
+    let task = creatTaskWithContent(taskData.title)
+    let taskBlock = document.getElementById("task-block")
+    taskBlock.appendChild(task)
+
+})
 
