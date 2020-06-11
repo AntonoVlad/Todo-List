@@ -2,25 +2,38 @@ let addBtn = document.getElementById("add-btn")
 addBtn.onclick = function () {
     let taskInput = document.getElementById("task-input")
     let taskInputValue = taskInput.value
-    let div = creatTask()
+    let task = creatTask()
     let taskBlock = document.getElementById("task-block")
-    taskBlock.appendChild(div)
-    let chekbox = creatChekbox(div)
-    div.appendChild(chekbox)
+    taskBlock.appendChild(task)
+    let chekbox = creatChekbox(task)
+    task.appendChild(chekbox)
     let taskTextBox = creatTextbox(taskInputValue)
-    div.appendChild(taskTextBox)
+    task.appendChild(taskTextBox)
+    let taskTimeBox = creatTaskTimeBox()
+    task.appendChild(taskTimeBox)
     let taskTime = creatTaskTime()
-    div.appendChild(taskTime)
-
+    taskTimeBox.appendChild(taskTime)
 }
 
 function creatChekbox(task) {
     let chekbox = document.createElement("input")
     chekbox.setAttribute("type", "checkbox")
     chekbox.setAttribute("class", "task-checkbox")
-    chekbox.onchange = function () {
-        let doneTaskBlock = document.getElementById("done-task-block")
-        doneTaskBlock.appendChild(task)
+    chekbox.onchange = function (event) {
+
+        let isCheckBoxChecked = event.target.checked
+        let taskTimeBox = task.querySelector(".task-time-box")
+        if (isCheckBoxChecked) {
+            let doneTaskBlock = document.getElementById("done-task-block")
+            doneTaskBlock.appendChild(task)
+            let taskClock = creatTaskClock()
+            taskTimeBox.appendChild(taskClock)
+        } else {
+            let taskBlock = document.getElementById("task-block")
+            taskBlock.appendChild(task)
+            let taskClock = task.querySelector(".task-clock")
+            taskTimeBox.removeChild(taskClock)
+        }
 
     }
     return chekbox
@@ -48,3 +61,19 @@ function creatTask() {
 
     return div
 }
+
+function creatTaskTimeBox() {
+    let taskTimeBox = document.createElement("div")
+    taskTimeBox.setAttribute("class", "task-time-box")
+
+    return taskTimeBox
+}
+
+function creatTaskClock() {
+    let taskClock = document.createElement("div")
+    taskClock.setAttribute("class", "task-clock")
+    taskClock.textContent = new Date().toLocaleTimeString('en', {hour: 'numeric', minute: 'numeric'})
+
+    return taskClock
+}
+
