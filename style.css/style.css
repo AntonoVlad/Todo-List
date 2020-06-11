@@ -134,6 +134,9 @@ h1 {
     display: flex;
     vertical-align: middle;
 }
+.task.hidden {
+    display: none;
+}
 
 .task-text {
     flex-grow: 1;

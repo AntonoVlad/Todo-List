@@ -77,3 +77,15 @@ function creatTaskClock() {
     return taskClock
 }
 
+let taskFilter = document.querySelector(".page-search")
+taskFilter.oninput = function () {
+    let taskFilterValue = taskFilter.value
+    let tasks = document.querySelectorAll(".task")
+    tasks.forEach(function (task) {
+        let taskTextBox = task.querySelector(".task-text")
+        let taskText = taskTextBox.textContent
+        let needShowTask = taskText.includes(taskFilterValue)
+        task.classList.toggle("hidden",!needShowTask)
+    })
+}
+
