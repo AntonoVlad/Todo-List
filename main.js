@@ -1,108 +1,20 @@
-let addBtn = document.getElementById("add-btn")
-let tasksData = JSON.parse(localStorage.getItem("task-data")) || []
-addBtn.onclick = function () {
-    let taskInput = document.getElementById("task-input")
-    let taskInputValue = taskInput.value
-    console.log(tasksData)
-    tasksData.push({title: taskInputValue})
-    localStorage.setItem("task-data", JSON.stringify(tasksData))
-    let task = creatTaskWithContent(taskInputValue)
-    let taskBlock = document.getElementById("task-block")
-    taskBlock.appendChild(task)
-}
-
-function creatChekbox(task) {
-    let chekbox = document.createElement("input")
-    chekbox.setAttribute("type", "checkbox")
-    chekbox.setAttribute("class", "task-checkbox")
-    chekbox.onchange = function (event) {
-
-        let isCheckBoxChecked = event.target.checked
-        let taskTimeBox = task.querySelector(".task-time-box")
-        if (isCheckBoxChecked) {
-            let doneTaskBlock = document.getElementById("done-task-block")
-            doneTaskBlock.appendChild(task)
-            let taskClock = creatTaskClock()
-            taskTimeBox.appendChild(taskClock)
-        } else {
-            let taskBlock = document.getElementById("task-block")
-            taskBlock.appendChild(task)
-            let taskClock = task.querySelector(".task-clock")
-            taskTimeBox.removeChild(taskClock)
-        }
-
-    }
-    return chekbox
-}
-
-function creatTextbox(taskInputValue) {
-    let taskTextBox = document.createElement("div")
-    taskTextBox.setAttribute("class", "task-text")
-    taskTextBox.textContent = taskInputValue
-
-    return taskTextBox
-}
-
-function creatTaskTime() {
+let btn = document.querySelector("#add-btn")
+let input = document.querySelector("#task-input")
+let taskBlock = document.querySelector("#task-block")
+btn.onclick = function() {
+    let inputValue = input.value
+    let task = document.createElement("div")
+    task.classList.add("task")
+    taskBlock.append(task)
+    let checkBox = document.createElement("input")
+    checkBox.setAttribute("type", "checkbox")
+    task.append(checkBox)
+    let taskText = document.createElement("div")
+    taskText.classList.add("task-text")
+    taskText.textContent = inputValue
+    task.append(taskText)
     let taskTime = document.createElement("div")
-    taskTime.setAttribute("class", "task-time")
-    taskTime.textContent = new Date().toLocaleTimeString('en', {hour: 'numeric', minute: 'numeric'})
-
-    return taskTime
+    taskTime.classList.add("task-time")
+    taskTime.textContent = new Date().toLocaleTimeString()
+    task.append(taskTime)
 }
-
-function creatTask() {
-    let div = document.createElement("div")
-    div.setAttribute("class", "task")
-
-    return div
-}
-
-function creatTaskTimeBox() {
-    let taskTimeBox = document.createElement("div")
-    taskTimeBox.setAttribute("class", "task-time-box")
-
-    return taskTimeBox
-}
-
-function creatTaskClock() {
-    let taskClock = document.createElement("div")
-    taskClock.setAttribute("class", "task-clock")
-    taskClock.textContent = new Date().toLocaleTimeString('en', {hour: 'numeric', minute: 'numeric'})
-
-    return taskClock
-}
-
-let taskFilter = document.querySelector(".page-search")
-taskFilter.oninput = function () {
-    let taskFilterValue = taskFilter.value
-    let tasks = document.querySelectorAll(".task")
-    tasks.forEach(function (task) {
-        let taskTextBox = task.querySelector(".task-text")
-        let taskText = taskTextBox.textContent
-        let needShowTask = taskText.includes(taskFilterValue)
-        task.classList.toggle("hidden", !needShowTask)
-    })
-}
-
-function creatTaskWithContent(taskInputValue) {
-    let task = creatTask()
-    let chekbox = creatChekbox(task)
-    task.appendChild(chekbox)
-    let taskTextBox = creatTextbox(taskInputValue)
-    task.appendChild(taskTextBox)
-    let taskTimeBox = creatTaskTimeBox()
-    task.appendChild(taskTimeBox)
-    let taskTime = creatTaskTime()
-    taskTimeBox.appendChild(taskTime)
-
-    return task
-}
-
-tasksData.forEach(function (taskData) {
-    let task = creatTaskWithContent(taskData.title)
-    let taskBlock = document.getElementById("task-block")
-    taskBlock.appendChild(task)
-
-})
-
