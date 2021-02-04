@@ -1,31 +1,46 @@
-import {creatCheckBox, createTask, createTaskText, createTaskTime} from "./helpers.js";
-
 let btn = document.querySelector("#add-btn")
-let input = document.querySelector("#task-input")
-let taskBlock = document.querySelector("#task-block")
-let doneTaskBlock = document.querySelector("#done-task-block")
-btn.onclick = function () {
-    let inputValue = input.value
-    let task = createTask()
-    let checkBox = creatCheckBox(task)
-    task.append(checkBox)
-    let taskText = createTaskText(inputValue)
-    task.append(taskText)
-    let taskTime = createTaskTime()
-    task.append(taskTime)
-    taskBlock.append(task)
+let openTaskBlock = document.querySelector(".open-task-section .task-block")
+let inputTask = document.querySelector(".new-task-input")
+
+btn.addEventListener("click", function () {
+    let newTask = createTask()
+    let newCheckbox = createCheckboxTask()
+    let newText = createTextTask(inputTask.value)
+    let newDate = createDateTask()
+    openTaskBlock.appendChild(newTask)
+    newTask.appendChild(newCheckbox)
+    newTask.appendChild(newText)
+    newTask.appendChild(newDate)
+})
+
+function createTask() {
+    let newTask = document.createElement("div")
+    newTask.classList.add("task")
+
+    return newTask
 }
-let clearOpen = document.querySelector(".clear-open")
-let clearDone = document.querySelector(".clear-done")
-clearOpen.onclick = function () {
-    let tasks = taskBlock.querySelectorAll(".task")
-    for (let task of tasks) {
-        taskBlock.removeChild(task)
-    }
+
+function createCheckboxTask() {
+    let checkbox = document.createElement("input")
+    checkbox.classList.add("task-checkbox")
+    checkbox.setAttribute("type", "checkbox")
+
+    return checkbox
 }
-clearDone.onclick = function () {
-    let tasks = doneTaskBlock.querySelectorAll(".task")
-    for (let task of tasks) {
-        doneTaskBlock.removeChild(task)
-    }
+
+function createTextTask(value) {
+    let textTask = document.createElement("div")
+    textTask.classList.add("task-text")
+    textTask.textContent = value
+
+    return textTask
 }
+
+function createDateTask() {
+    let dateTask = document.createElement("div")
+    dateTask.classList.add("task-time")
+    dateTask.textContent = new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString()
+
+    return dateTask
+}
+
