@@ -1,7 +1,9 @@
 let btn = document.querySelector("#add-btn")
 let openTaskBlock = document.querySelector(".open-task-section .task-block")
 let inputTask = document.querySelector(".new-task-input")
-let doneTaskBlock = document.querySelector(".done-task-section")
+let doneTaskBlock = document.querySelector(".done-task-section .task-block")
+let clearOpenTask = document.querySelector(".clear-open")
+let clearDoneTask = document.querySelector(".clear-done")
 
 btn.addEventListener("click", function () {
     let newTask = createTask()
@@ -12,6 +14,7 @@ btn.addEventListener("click", function () {
     newTask.appendChild(newCheckbox)
     newTask.appendChild(newText)
     newTask.appendChild(newDate)
+    inputTask.value = ""
 })
 
 function createTask() {
@@ -54,4 +57,12 @@ function createDateTask() {
 
     return dateTask
 }
+
+clearOpenTask.addEventListener("click", function () {
+    openTaskBlock.textContent = ""
+})
+
+clearDoneTask.addEventListener("click", function () {
+    doneTaskBlock.textContent = ""
+})
 
