@@ -4,6 +4,7 @@ let inputTask = document.querySelector(".new-task-input")
 let doneTaskBlock = document.querySelector(".done-task-section .task-block")
 let clearOpenTask = document.querySelector(".clear-open")
 let clearDoneTask = document.querySelector(".clear-done")
+let searchInput = document.querySelector(".page-search")
 
 btn.addEventListener("click", function () {
     let newTask = createTask()
@@ -32,7 +33,7 @@ function createCheckboxTask(newTask) {
         if (checkbox.checked) {
             doneTaskBlock.appendChild(newTask)
 
-        }else {
+        } else {
             openTaskBlock.appendChild(newTask)
 
         }
@@ -64,5 +65,17 @@ clearOpenTask.addEventListener("click", function () {
 
 clearDoneTask.addEventListener("click", function () {
     doneTaskBlock.textContent = ""
+})
+
+searchInput.addEventListener("input", function () {
+    let allTasks = document.querySelectorAll(".task")
+    for (let i = 0; i < allTasks.length; i++) {
+        let text = allTasks[i].querySelector(".task-text").textContent
+        if (text.toLowerCase().includes(searchInput.value.toLowerCase())) {
+            allTasks[i].classList.remove("hidden")
+        } else {
+            allTasks[i].classList.add("hidden")
+        }
+    }
 })
 
