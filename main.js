@@ -5,6 +5,8 @@ let doneTaskBlock = document.querySelector(".done-task-section .task-block")
 let clearOpenTask = document.querySelector(".clear-open")
 let clearDoneTask = document.querySelector(".clear-done")
 let searchInput = document.querySelector(".page-search")
+let openSelect = document.querySelector(".open-task-section .select")
+let doneSelect = document.querySelector(".done-task-section .select")
 
 btn.addEventListener("click", function () {
     let newTask = createTask()
@@ -54,6 +56,7 @@ function createTextTask(value) {
 function createDateTask() {
     let dateTask = document.createElement("div")
     dateTask.classList.add("task-time")
+    dateTask.setAttribute("data-date", new Date().getTime())
     dateTask.textContent = new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString()
 
     return dateTask
@@ -77,5 +80,44 @@ searchInput.addEventListener("input", function () {
             allTasks[i].classList.add("hidden")
         }
     }
+})
+
+openSelect.addEventListener("change", function () {
+    let tasks = openTaskBlock.querySelectorAll(".task")
+    let tasksArray = Array.from(tasks)
+    tasksArray.sort(function (task1, task2) {
+        let task1Date = task1.querySelector(".task-time").getAttribute("data-date")
+        let task2Date = task2.querySelector(".task-time").getAttribute("data-date")
+
+        return openSelect.value == "dsc" ? task2Date - task1Date : task1Date - task2Date
+    })
+    tasksArray.forEach(function (task) {
+        openTaskBlock.appendChild(task)
+    })
+})
+
+
+doneSelect.addEventListener("change", function () {
+    let tasks = doneTaskBlock.querySelectorAll(".task")
+    let taskArray = Array.from(tasks)
+    taskArray.sort(function (task1, task2) {
+        let task1Date = task1.querySelector(".task-text").textContent
+        let task2Date = task2.querySelector(".task-text").textContent
+
+        if (task1Date > task2Date) {
+
+            return doneSelect.value == "desc" ? -1 : 1
+        }
+        if (task1Date < task2Date) {
+
+            return doneSelect.value == "desc" ? 1 : -1
+        }
+
+            return 0
+    })
+    taskArray.forEach(function (task) {
+        doneTaskBlock.appendChild(task)
+    })
+
 })
 
